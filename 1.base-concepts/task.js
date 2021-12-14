@@ -17,48 +17,53 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
   let percentage;
 
-  //Провнрка введённыз значений на число
+  //Проверка введённых значений на число
   function checkIsNan() {
     if (isNaN(percent) === true) {
-      return alert(
-        `Параметр "Процентная ставка" содержит неправильное значение ${percent}`
-      );
+      return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`;
     } else return (percentage = percent / 100 / 12);
+
+    if (isNaN(contribution) === true) {
+      return `Параметр "Начальный взнос" содержит неправильное значение ${contribution}`;
+    } else return;
+
+    if (isNaN(amount) === true) {
+      return `Параметр "Общая сумма" содержит неправильное значение ${amount}`;
+    } else return;
   }
-  checkIsNan(percent);
 
-  console.log(typeof percentage);
-
-  //Current Time
-  let currentTime = new Date();
-  console.log(currentTime);
+  checkIsNan(percent, contribution, amount);
 
   //Future Time
   let futureTime = new Date(date);
+  let futureMonth = new Date().getMonth(date);
+
   console.log(futureTime);
 
-  let time = futureTime - currentTime;
-  console.log(time);
+  //Current Time
 
-  //Time calculation
-  let elapsed = futureTime.getTime() - currentTime.getTime();
-  let loanTermDays = elapsed / 8.64e7;
+  let currentTime = new Date();
+  console.log(currentTime);
 
-  let loanTermMonth = loanTermDays / 30;
-  //console.log(loanTermMonth);
+  let currentMonth = new Date().getMonth();
 
-  let loanTerm = Math.floor(loanTermMonth);
-  console.log(loanTerm);
+  let currentYear = new Date().getFullYear();
 
-  //console.log(loanTerm);
+  //Time difference
+
+  let diffYears = futureTime.getFullYear() - currentYear;
+  console.log(diffYears);
+
+  let diffMonth = diffYears * 12 - (currentMonth + 1) + (futureMonth + 1);
+  console.log(diffMonth);
 
   //Loan calculation
   let loan = amount - contribution; //тело кредита
 
   let monthPayment =
-    loan * (percentage + percentage / ((1 + percentage) ** loanTerm - 1)); //ежемесячный платёж
+    loan * (percentage + percentage / ((1 + percentage) ** diffMonth - 1)); //ежемесячный платёж
 
-  let fullPayment = monthPayment * loanTermMonth; //Общая сумма выплаты
+  let fullPayment = monthPayment * diffMonth; //Общая сумма выплаты
 
   totalAmount = fullPayment.toFixed(2);
 
