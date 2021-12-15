@@ -38,12 +38,10 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let futureTime = new Date(date);
   let futureMonth = new Date().getMonth(date);
 
-  console.log(futureTime);
-
   //Current Time
 
   let currentTime = new Date();
-  console.log(currentTime);
+  //console.log(currentTime);
 
   let currentMonth = new Date().getMonth();
 
@@ -52,10 +50,10 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   //Time difference
 
   let diffYears = futureTime.getFullYear() - currentYear;
-  console.log(diffYears);
+  //console.log(diffYears);
 
   let diffMonth = diffYears * 12 - (currentMonth + 1) + (futureMonth + 1);
-  console.log(diffMonth);
+  //console.log(diffMonth);
 
   //Loan calculation
   let loan = amount - contribution; //тело кредита
@@ -63,13 +61,14 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let monthPayment =
     loan * (percentage + percentage / ((1 + percentage) ** diffMonth - 1)); //ежемесячный платёж
 
-  let fullPayment = monthPayment * diffMonth; //Общая сумма выплаты
+  let fullPayment = (monthPayment * diffMonth).toFixed(2); //Общая сумма выплаты
 
-  totalAmount = fullPayment.toFixed(2);
+  totalAmount = Number(fullPayment);
+  console.log(totalAmount);
 
   // код для задачи №2 писать здесь
 
-  return parseFloat(totalAmount);
+  return totalAmount;
 }
 
 calculateTotalMortgage();
