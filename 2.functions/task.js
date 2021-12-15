@@ -6,31 +6,30 @@ function getArrayParams(arr) {
   let avg;
   let quantity;
 
-  arr = [1, 2, 3, -100, 10];
-
   //Search for minimum and maximum values
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] < min) {
       min = arr[i];
-    } else if (arr[i] > max) {
+    }
+    if (arr[i] > max) {
       max = arr[i];
+    }
+    if (i < arr.length) {
+      sum += arr[i];
     }
   }
 
   //Calculate the sum
-  for (let i = 0; i < arr.length; i++) {
-    sum += arr[i];
-  }
 
   quantity = arr.length;
 
   let average = sum / quantity;
 
-  avg = average.toFixed(2);
+  avg = Number(average.toFixed(2));
 
   // Ваш код
 
-  return { min: min, max: max, avg: +avg };
+  return { min: min, max: max, avg: avg };
 }
 
 console.log(getArrayParams());
