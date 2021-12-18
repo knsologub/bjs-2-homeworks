@@ -15,28 +15,37 @@ function solveEquation(a, b, c) {
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
-  let percentage;
 
-  //Проверка введённых значений на число
-  function checkIsNan() {
-    if (isNaN(percent) === true) {
-      return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`;
-    } else return (percentage = percent / 100 / 12);
-
-    if (isNaN(contribution) === true) {
-      return `Параметр "Начальный взнос" содержит неправильное значение ${contribution}`;
-    } else return;
-
-    if (isNaN(amount) === true) {
-      return `Параметр "Общая сумма" содержит неправильное значение ${amount}`;
-    } else return;
+  if (!isNaN(parseInt(percent)) && parseInt(percent) >= 0) {
+    percent = Number(percent);
+  } else {
+    return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
   }
 
-  checkIsNan(percent, contribution, amount);
+  console.log(typeof percent);
+
+  if (!isNaN(parseInt(contribution)) && parseInt(contribution) >= 0) {
+    contribution = Number(contribution);
+  } else {
+    return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
+  }
+
+  console.log(typeof contribution);
+
+  if (!isNaN(parseInt(amount)) && parseInt(amount) >= 0) {
+    amount = Number(amount);
+  } else {
+    return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
+  }
+
+  console.log(typeof amount);
 
   //Future Time
   let futureTime = new Date(date);
   let futureMonth = new Date().getMonth(date);
+
+  let percentage = percent / 100 / 12;
+  console.log(typeof percentage);
 
   //Current Time
 
@@ -63,7 +72,10 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   let fullPayment = (monthPayment * diffMonth).toFixed(2); //Общая сумма выплаты
 
-  totalAmount = Number(fullPayment);
+  totalAmount = parseFloat(fullPayment);
+
+  console.log(typeof fullPayment);
+  console.log(typeof totalAmount);
   console.log(totalAmount);
 
   // код для задачи №2 писать здесь
