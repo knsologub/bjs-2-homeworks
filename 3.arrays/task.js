@@ -16,8 +16,6 @@ function compareArrays(arr1, arr2) {
   return result; // boolean
 }
 
-console.log(compareArrays([1, 2, 3, 4], [2, 3, 1]));
-
 function advancedFilter(arr) {
   let resultArr;
 
@@ -29,4 +27,3 @@ function advancedFilter(arr) {
 
   return resultArr; // array
 }
-//console.log(advancedFilter());
